@@ -8,7 +8,7 @@ typedef struct
     struct Node* next;
 }Node;
 
-struct Node* head;
+Node* head;
 void Insert(int x);
 void Print();
 
@@ -35,5 +35,9 @@ void Insert(int x)
     //create a new node
     Node* temp = (Node*) malloc(sizeof(Node));
     temp->data = x;
-    temp->next = NULL;
+
+    temp->next = head; //temp's next now points to the linked list
+                       // if head empty (NULL) then temp->next also points to NULL
+    head = temp; //head now points to our new node (new 1st element of list)
+    
 }
