@@ -35,7 +35,8 @@ int main()
     scanf("%d", &num);
     
     //make sure a valid position is entered
-    while(!(position >=0 && position <= n-1)){
+    while(!(position >= 0 && position <= n-1) || (n == 0 && position == 0))
+    {
         printf("Enter the position you would like to add it at: ");
         scanf("%d", &position);
     }
@@ -73,12 +74,21 @@ void Insert_nth(int value, int position){
     
     Node* ptr = headptr;
 
-    while(ptr != position - 1)
+    if(headptr->next == NULL)
     {
-        ptr = ptr->next;
+        new_node->next = headptr;
+        headptr = new_node;
     }
-
-    new_node->next = ptr->next;
-    ptr->next = new_node;
+    else
+    {
+        int curr_pos = 0;
+        while(curr_pos != position - 1)
+        {
+            ptr = ptr->next;
+            curr_pos++;
+        }
+        new_node->next = ptr->next;
+        ptr->next = new_node;
+    }
 
 }
