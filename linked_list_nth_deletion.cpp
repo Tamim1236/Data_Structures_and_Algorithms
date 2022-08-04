@@ -30,16 +30,49 @@ int main()
 
     Print();
 
+    //node removal
+    int value;
+    cout << "Enter the value you want to delete: ";
+    cin >> value;
+    Delete(value);
+    Print();
+
 
     return 0;
 }
 
 void Print()
 {
+    cout << "Here are the nodes in you list: " << endl;
     Node* ptr = head;
     while(ptr != NULL)
     {
         cout << ptr->value << " ";
         ptr = ptr->next;
+    }
+    cout << "" <<endl;
+}
+
+void Delete(int value)
+{
+    Node* ptr = head;
+    
+    //if we want to remove the first node
+    if(head->value == value)
+    {
+        head = head->next;
+    }
+
+    while(ptr->next->value != value) //traverse till we reach node before one to be removed (with value == 'value') 
+    {
+        ptr = ptr->next;
+    }
+    
+    if(ptr->next->value == value){
+        ptr->next = ptr->next->next; //node before one to be removed should point to next of one to be removed (unlink intended node)
+    }
+    else
+    {
+        cout << "The value you wished to remove is not present in." << endl;
     }
 }
