@@ -14,6 +14,7 @@ void Print();
 
 int main()
 {
+    //headptr = NULL;
     printf("Enter the number of nodes in your linked list: ");
     int n; //number of elements in the linked list
     int x; //current number to add to linked list
@@ -25,7 +26,7 @@ int main()
         scanf("%d", &x);
         Insert(x); //insert each number to create out initial linked list
     }
-    printf("Here is your current linked list:\n");
+    
     Print();
 
     //get new number to add to the linked list
@@ -35,10 +36,19 @@ int main()
     scanf("%d", &num);
     
     //make sure a valid position is entered
-    while(!(position >= 0 && position <= n-1) || (n == 0 && position == 0))
+    if(n == 0)
     {
-        printf("Enter the position you would like to add it at: ");
-        scanf("%d", &position);
+        while(position != 0){
+            printf("Enter a valid nth position you would like to add it at: ");
+            scanf("%d", &position);
+        }
+    }
+    else{
+        while(!(position >= 0 && position <= n-1))
+        {
+            printf("Enter a valid nth position you would like to add it at: ");
+            scanf("%d", &position);
+        }
     }
 
     Insert_nth(num, position);
@@ -49,6 +59,7 @@ int main()
 
 void Print()
 {
+    printf("Here is your current linked list:\n");
     Node* ptr = headptr;
     while(ptr != NULL)
     {
@@ -74,7 +85,7 @@ void Insert_nth(int value, int position){
     
     Node* ptr = headptr;
 
-    if(headptr->next == NULL)
+    if(headptr == NULL) //if no nodes, so head points to nothing
     {
         new_node->next = headptr;
         headptr = new_node;
