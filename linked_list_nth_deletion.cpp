@@ -61,6 +61,7 @@ void Delete(int value)
     if(head->value == value)
     {
         head = head->next;
+        return;
     }
 
     while(ptr->next->value != value) //traverse till we reach node before one to be removed (with value == 'value') 
