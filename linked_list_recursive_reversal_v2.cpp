@@ -9,7 +9,7 @@ struct Node{
 Node *head;
 
 void Print(Node* head);
-void Recursive_Reverse();
+void Recursive_Reverse(Node* ptr);
 
 int main(){
     int num_nodes;
@@ -28,6 +28,9 @@ int main(){
 
     cout << "Here is your current linked list:" << endl;
     Print(head);
+    cout << endl << "Now here is the linked list reversed: " << endl;
+    Recursive_Reverse(head);
+    Print(head);
 }
 
 void Print(Node* ptr)
@@ -36,4 +39,17 @@ void Print(Node* ptr)
 
     cout << ptr->data << " ";
     Print(ptr->next);
+}
+
+void Recursive_Reverse(Node* ptr){
+    if(ptr->next == NULL)
+    {
+        head = ptr;
+        return;
+    }
+
+    Recursive_Reverse(ptr->next); //allows us to traverse the list
+    Node* q = ptr->next;
+    q->next = ptr;
+    ptr->next = NULL;
 }
