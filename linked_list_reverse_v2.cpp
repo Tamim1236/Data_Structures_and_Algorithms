@@ -1,14 +1,14 @@
 #include <iostream>
 using namespace std;
 
+void Insert(int value);
+void Print();
+void Reverse();
+
 struct Node{
     int data;
     Node* next;
 };
-
-void Insert(int value);
-void Print();
-void Reverse();
 
 Node* head;
 
@@ -18,27 +18,18 @@ int main(){
     cout << "Enter the number of nodes you want in your linked list: ";
     cin >> num_nodes;
 
-    //int num;
     for(int i = 0; i < num_nodes; i++)
     {
         int num;
         cout << "Enter a number to add to the linked list: ";
         cin >> num;
         Insert(num);
-
-        // Node* new_node = new Node();
-        // cout << "Enter a number to add to the linked list: ";
-        // cin >> new_node->data;
-        // new_node->next = head->next;
-        // head = new_node;
-        
-
-        // Node* new_node = new Node();
-        // new_node->data = num;
-        // new_node->next = head->next;
-        // head = new_node;
     }
 
+    Print();
+
+    cout << "Now here is your linked list reversed:" << endl;
+    Reverse();
     Print();
 }
 
@@ -60,4 +51,28 @@ void Print(){
         tempptr = tempptr->next;
     }
     cout << "" << endl;
+}
+
+void Reverse(){
+    Node *prev_node, *curr_node, *next_node;
+
+    prev_node = NULL;
+    curr_node = head;
+    next_node = curr_node->next;
+
+    while(curr_node != NULL)
+    {
+        curr_node->next = prev_node; //reverse link
+        //move our group of three pointers ahead one
+        prev_node = curr_node;
+        curr_node = next_node;
+        
+        /*!!! without this, at the last node, we would have next_node point to null and then try
+        to access next_node->next (NULL Pointer Exception) - Alternatively, we could have defined next=curr->next at the
+        beginning of the while loop instead of outside first and avoid this case*/
+        if(next_node != NULL) 
+            next_node = next_node->next;
+    }
+    
+    head = prev_node; //once curr_node is NULL, head is set to prev_node (which is last node)
 }
