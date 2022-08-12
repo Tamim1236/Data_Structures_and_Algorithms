@@ -34,4 +34,5 @@ void Print(Node *ptr){
 
     cout << ptr->data << " ";
     Print(ptr->next);
+    //cout << ptr->data << " "; //having this line after the recursive call allows for reverse print
 }
